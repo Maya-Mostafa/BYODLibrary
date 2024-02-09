@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "12.22.10",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.9.1"
+    },
+    "version": "1.17.1",
+    "libraryName": "byod-library",
+    "libraryId": "d21b7901-79b3-4361-bd4b-dd0470556acb",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "byod-library",
+    "solutionShortDescription": "byod-library description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
