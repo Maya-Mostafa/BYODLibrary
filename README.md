@@ -95,3 +95,13 @@ npm install @pnp/spfx-controls-react --save --save-exact
 
 - PnP property controls
 npm install @pnp/spfx-property-controls --save --save-exact
+
+
+## Icons illustrations
+https://iconscout.com/illustrations/catalogue
+
+## Getting site & web id
+https://www.sharepointdiary.com/2018/04/sharepoint-online-powershell-to-get-site-collection-web-id.html
+Here is how to find the ID of a SharePoint Online site collection or subsite with REST endpoints:
+1- To Get Site Collection ID, hit this URL in the browser: https://<tenant>.sharepoint.com/sites/<site-url>/_api/site/id
+2- To get the subsite ID (or web ID) use: https://<tenant>.sharepoint.com/<site-url>/_api/web/id
