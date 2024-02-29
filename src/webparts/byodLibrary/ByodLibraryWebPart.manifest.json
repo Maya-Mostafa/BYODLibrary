@@ -23,8 +23,15 @@
     "officeFabricIconFontName": "Page",
     "properties": {
       "description": "BYOD Library",
-      "colExp": true,
-      "enableTargetAudience": false
+      "enableSearch": true,
+      "searchPlaceholder": "Search",
+      "enableTargetAudience": false,
+      "showBasedOnTargetAudience": false,
+      "isCollapsible": true,
+      "displayState": "expanded",
+      "iconAlignment": "Right",
+      "showDivider": false,
+      "thumbnail": "auto"
     }
   }]
 }

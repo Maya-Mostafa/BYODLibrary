@@ -6,11 +6,12 @@ import {
   PropertyPaneButton,
   PropertyPaneCheckbox,
   PropertyPaneChoiceGroup,
+  PropertyPaneDropdown,
   PropertyPaneLabel,
   PropertyPaneTextField,
   PropertyPaneToggle,
 } from '@microsoft/sp-property-pane';
-import { BaseClientSideWebPart, WebPartContext } from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import { PropertyFieldIconPicker } from '@pnp/spfx-property-controls/lib/PropertyFieldIconPicker';
 import { PropertyFieldFilePicker, IFilePickerResult } from "@pnp/spfx-property-controls/lib/PropertyFieldFilePicker";
@@ -30,11 +31,10 @@ export interface IPropertyControlsTestWebPartProps {
 export interface IByodLibraryWebPartProps {
   description: string;
 
-  context: WebPartContext;
   targetAudience: any;
   siteUrl: string;
   listName: string;
-  isExp: boolean;
+  displayState: string;
   color: string;
   openInNewTab: boolean;
   showDivider: boolean;
@@ -50,6 +50,7 @@ export interface IByodLibraryWebPartProps {
   enableSearch: boolean;
   searchPlaceholder: string;
   enableTargetAudience: boolean;
+  showBasedOnTargetAudience: boolean;
 }
 
 export default class ByodLibraryWebPart extends BaseClientSideWebPart<IByodLibraryWebPartProps> {
@@ -66,12 +67,13 @@ export default class ByodLibraryWebPart extends BaseClientSideWebPart<IByodLibra
         environmentMessage: this._environmentMessage,
         hasTeamsContext: !!this.context.sdks.microsoftTeams,
         userDisplayName: this.context.pageContext.user.displayName,
+        userEmail: this.context.pageContext.user.email,
 
         context: this.context,
         targetAudience: this.properties.targetAudience,
         siteUrl: this.properties.siteUrl,
         listName: this.properties.listName,
-        isExp: this.properties.isExp,
+        displayState: this.properties.displayState,
         color: this.properties.color,
         openInNewTab : this.properties.openInNewTab,
         showDivider: this.properties.showDivider,
@@ -86,7 +88,8 @@ export default class ByodLibraryWebPart extends BaseClientSideWebPart<IByodLibra
         sectionDescription: this.properties.sectionDescription,
         enableSearch: this.properties.enableSearch,
         searchPlaceholder: this.properties.searchPlaceholder,
-        enableTargetAudience: this.properties.enableTargetAudience
+        enableTargetAudience: this.properties.enableTargetAudience,
+        showBasedOnTargetAudience: this.properties.showBasedOnTargetAudience
       }
     );
 
@@ -215,7 +218,7 @@ export default class ByodLibraryWebPart extends BaseClientSideWebPart<IByodLibra
                   disabled: !this.properties.enableSearch
                 }),
                 PropertyPaneToggle('enableTargetAudience', {
-                  label: 'Enable audience targeting',
+                  label: 'Enable audience targeting on item level',
                   onText: 'On',
                   offText: 'Off',
                   checked: this.properties.enableTargetAudience,
@@ -225,22 +228,43 @@ export default class ByodLibraryWebPart extends BaseClientSideWebPart<IByodLibra
             {
               groupName: 'Display',
               groupFields:[
+                PropertyFieldPeoplePicker('targetAudience', {
+                  label: 'Target Audience e.g. User(s), Group(s)',
+                  initialData: this.properties.targetAudience,
+                  allowDuplicate: false,
+                  principalType: [PrincipalType.Users, PrincipalType.SharePoint, PrincipalType.Security],
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  context: this.context as any,
+                  properties: this.properties,
+                  onGetErrorMessage: null,
+                  deferredValidationTime: 0,
+                  key: 'peopleFieldId'
+                }),
+                PropertyPaneCheckbox('showBasedOnTargetAudience', {
+                  checked: this.properties.showBasedOnTargetAudience,
+                  text: 'Show/hide based on target audience',
+                }),
                 PropertyPaneCheckbox('isCollapsible', {
                   checked: this.properties.isCollapsible,
                   text: 'Make this section collapsible',
                 }),
-                PropertyPaneToggle('isExp', {
+                PropertyPaneDropdown('displayState', {
                   label: 'Default display',
-                  onText: 'Expanded',
-                  offText: 'Collapsed',
-                  checked: this.properties.isExp
+                  options : [
+                    {key: 'expanded', text:'Expanded'}, 
+                    {key: 'collapsed', text:'Collapsed'}, 
+                    {key: 'expandedTargetAudience', text:'Expanded based on target audience'}, 
+                  ],
+                  disabled: !this.properties.isCollapsible,
+                  selectedKey: 'expanded'
                 }),
                 PropertyPaneToggle('iconAlignment', {
                   label: 'Expand/collapse icon alignment',
                   onText: 'Right',
                   offText: 'Left',
-                  checked: this.properties.iconAlignment === 'Right'
-                })
+                  checked: this.properties.iconAlignment === 'Right',
+                  disabled: !this.properties.isCollapsible
+                }),
               ]
             },
             {
@@ -307,23 +331,7 @@ export default class ByodLibraryWebPart extends BaseClientSideWebPart<IByodLibra
                 })
               ]
             },
-            {
-              groupName: 'Target Audience',
-              groupFields: [
-                PropertyFieldPeoplePicker('targetAudience', {
-                  label: 'Target Audience e.g. User(s), Group(s)',
-                  initialData: this.properties.targetAudience,
-                  allowDuplicate: false,
-                  principalType: [PrincipalType.Users, PrincipalType.SharePoint, PrincipalType.Security],
-                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
-                  context: this.context as any,
-                  properties: this.properties,
-                  onGetErrorMessage: null,
-                  deferredValidationTime: 0,
-                  key: 'peopleFieldId'
-                })
-              ]
-            }
+            
           ]
         }
       ]
