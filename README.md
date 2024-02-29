@@ -105,3 +105,17 @@ https://www.sharepointdiary.com/2018/04/sharepoint-online-powershell-to-get-site
 Here is how to find the ID of a SharePoint Online site collection or subsite with REST endpoints:
 1- To Get Site Collection ID, hit this URL in the browser: https://<tenant>.sharepoint.com/sites/<site-url>/_api/site/id
 2- To get the subsite ID (or web ID) use: https://<tenant>.sharepoint.com/<site-url>/_api/web/id
+
+## Getting list guid
+https://sharepoint.sureshc.com/2017/10/how-to-get-sharepoint-list-library-guid-rest.html
+https://pdsb1.sharepoint.com/sites/sLibrary/_api/web/lists/getByTitle('Professional')/Id
+
+## Notes - Target Audience
+https://stackoverflow.com/questions/66532774/sharepoint-online-audience-targeting-group-id
+https://github.com/pnp/pnpjs/issues/2332
+https://github.com/pnp/pnpcore/issues/399
+https://sharepoint.stackexchange.com/questions/121452/access-target-audience-with-rest-api-the-field-or-property-audience-does-not
+
+https://pdsb1.sharepoint.com/sites/my-site//_api/web/siteusers?$filter=Title%20eq%20%271106-SIEP-Team%20Members%27
+https://pdsb1.sharepoint.com/sites/ModernDemos/_catalogs/users/detail.aspx?Paged=TRUE&p_ID=42&p_Title=NAVPREET%20KAUR&View=%7b2C99A7C6%2dC77B%2d4E83%2dA68F%2dAA2497ED1EDC%7d&SortField=ID&SortDir=Asc&PageFirstRow=31&InitialTabId=Ribbon%2ERead&VisibilityContext=WSSTabPersistence
+https://pdsb1.sharepoint.com/sites/moderndemos//_api/web/siteusers?$filter=Email%20eq%20%27LearningTechnologySupportServices-DL@peelsb.com%27
