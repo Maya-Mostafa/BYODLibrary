@@ -19,7 +19,7 @@ export default function LibraryItem(props: LibraryItemProps) {
     };
 
     return (
-        <li className={styles.cardItem} key={props.item.ID}>
+        <li className={styles.cardItem} key={props.item.id}>
             <div className={styles.card}>
                 <div className={styles.cardImage}>
                     {props.thumbnail === 'auto' &&
@@ -85,8 +85,14 @@ export default function LibraryItem(props: LibraryItemProps) {
                             </>
                         }
                     </div>
-                </div>
-            </div>
+                </div> 
+                {props.showEditControls &&
+                    <div className={styles.iconBtnCntnr}>
+                        <Icon iconName="Edit" className={styles.editIcon} onClick={() => props.handleEdit(props.item.id)} />
+                        <Icon iconName="Delete" className={styles.deleteIcon} onClick={() => props.handleDelete(props.item.id)}/>
+                    </div>
+                }               
+            </div>            
         </li>
     );
 }
