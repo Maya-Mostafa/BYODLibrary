@@ -224,6 +224,7 @@ hr {
     font-weight: 600;
     list-style: none;
     border-bottom: 1px solid #333;
+    margin: 10px 0 20px 0;
   }
 }
 
@@ -272,4 +273,53 @@ hr {
 .searchBox{
   margin-top: 15px;
   border-color: #ddd;
+}
+
+// Edit controls
+.editControls{
+  display: block;
+  padding: 0 15px 10px 5px;
+  &:before{
+    content: "";
+    background-color: #c8c6c4;
+    height: 1px;
+    margin: 20px 0 15px;
+    width: 100%;
+    display: block;
+  }
+  .controlsBtn{
+    background: inherit;
+    color: inherit;
+    i{
+      color: inherit;
+    }
+  }
+  .editToggle{
+    float: right;
+    margin-top: -7px;
+    label{
+      color: inherit;
+    }
+    button{
+      min-width: 0;
+    }
+  }
+}
+
+
+.iconBtnCntnr{
+  bottom: 15px;
+  position: absolute;
+  right: 15px;
+  .deleteIcon, .editIcon{
+    background: #eee;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 16px;
+    padding: 4px;
+    width: 20px;
+    text-align: center;
+    margin-left: 6px;
+    color: #0096cf;
+  }
 }
