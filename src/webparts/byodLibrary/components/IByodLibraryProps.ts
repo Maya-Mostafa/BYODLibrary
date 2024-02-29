@@ -6,12 +6,13 @@ export interface IByodLibraryProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  userEmail: string;
 
   context: WebPartContext;
   targetAudience: any;
   siteUrl: string;
   listName: string;
-  isExp: boolean;
+  displayState: string;
   color: string;
   openInNewTab: boolean;
   showDivider: boolean;
@@ -28,4 +29,5 @@ export interface IByodLibraryProps {
   enableSearch: boolean;
   searchPlaceholder: string;
   enableTargetAudience: boolean;
+  showBasedOnTargetAudience: boolean;
 }
