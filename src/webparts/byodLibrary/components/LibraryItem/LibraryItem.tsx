@@ -21,27 +21,37 @@ export default function LibraryItem(props: LibraryItemProps) {
     return (
         <li className={styles.cardItem} key={props.item.id}>
             <div className={styles.card}>
-                <div className={styles.cardImage}>
-                    {props.thumbnail === 'auto' &&
-                        <img src={props.item.Image? props.item.Image.Url : require('../../assets/lib5.svg')} />
+                <a title={props.item.link ? props.item.link.Description : ''} href={props.item.link ? props.item.link.Url: ''} rel="noreferrer" target={props.item.NewTab ? "_blank" : "_self"} data-interception="off">
+                    {props.thumbnail === 'auto' && props.item.Image &&
+                        <div className={styles.cardImage}>
+                            <img title={props.item.Title} alt={props.item.Title} src={props.item.Image.Url} />
+                        </div>
                     // <img src={props.item.image ? JSON.parse(props.item.image)['serverRelativeUrl'] : require('../../assets/lib5.svg')} />
                     }
                     {props.thumbnail === 'icon' &&
-                        <Icon iconName={props.iconPicker}/>
+                        <div className={styles.cardImage}>
+                            <Icon title={props.item.Title} iconName={props.iconPicker}/>
+                        </div>
                     }
                     {props.thumbnail === 'customImg' &&
-                        <img height={45} src={props.customImgPicker.fileAbsoluteUrl} />
+                        <div className={styles.cardImage}>
+                            <img title={props.item.Title} alt={props.item.Title} height={45} src={props.customImgPicker.fileAbsoluteUrl} />
+                        </div>
                     }
-                </div>
+                </a>
                 <div className={styles.cardContent}>
-                    <h2 className={styles.cardTitle}>
-                        <a title={props.item.link ? props.item.link.Description : ''} href={props.item.link ? props.item.link.Url: ''} 
-                            rel="noreferrer" target={props.item.NewTab ? "_blank" : "_self"} data-interception="off">
-                            {props.item.Title}
-                        </a>
-                    </h2>
+                    {!props.item.Image &&
+                        <h2 className={styles.cardTitle}>
+                            <a title={props.item.link ? props.item.link.Description : ''} href={props.item.link ? props.item.link.Url: ''} 
+                                rel="noreferrer" target={props.item.NewTab ? "_blank" : "_self"} data-interception="off">
+                                {props.item.Title}
+                            </a>
+                        </h2>
+                    }
                     <div className={styles.cardText}>
-                        <p>{props.item.Short_x0020_Description}</p>
+                        <a title={props.item.link ? props.item.link.Description : ''} href={props.item.link ? props.item.link.Url: ''} rel="noreferrer" target={props.item.NewTab ? "_blank" : "_self"} data-interception="off">
+                            <p>{props.item.Short_x0020_Description}</p>
+                        </a>
                         {props.item.login && props.item.pwd &&
                             <div className={styles.cardFlag}>
                                 <FlagBtn 
@@ -70,7 +80,7 @@ export default function LibraryItem(props: LibraryItemProps) {
 
                                 {teachingBubbleVisible && (
                                     <TeachingBubble
-                                        illustrationImage={{src: require('../../assets/login_info_8.png'), alt: '', height: '110px', style:{paddingLeft: '7px'}}}
+                                        illustrationImage={{src: require('../../assets/login_info_9.png'), alt: '', height: '110px', style:{paddingLeft: '7px'}}}
                                         isWide={true}
                                         hasSmallHeadline={true}
                                         hasCloseButton={true}
