@@ -67,7 +67,7 @@ const getSiteId = async (context: WebPartContext, siteUrl: string) =>{
     return response.value;
 };
 
-const getListGuid  = async (context: WebPartContext, siteUrl: string, listName: string) => {
+export const getListGuid  = async (context: WebPartContext, siteUrl: string, listName: string) => {
     const responseUrl = `${siteUrl}/_api/web/lists/getByTitle('${listName}')/Id`;
     const response = await context.spHttpClient.get(responseUrl, SPHttpClient.configurations.v1).then(r => r.json());
     return response.value;
@@ -79,7 +79,7 @@ export const getListItemsGraph = async (context: WebPartContext, siteUrl: string
     const listGuid = await getListGuid(context, siteUrl, listName);
 
     const graphClient = await context.msGraphClientFactory.getClient('3');
-    const items = await graphClient.api(`sites/${siteId}/lists/${listGuid}/items?expand=fields(select=Title,link,Image,_ModernAudienceTargetUserField,Author,Id,login,pwd,LoginDisclaimer,NewTab,Category,ID,Created,Modified,Short_x0020_Description)`).get();
+    const items = await graphClient.api(`sites/${siteId}/lists/${listGuid}/items?expand=fields(select=Title,link,Image,_ModernAudienceTargetUserField,Author,Id,login,pwd,LoginDisclaimer,NewTab,Category,ID,Created,Modified,Short_x0020_Description,Order)&orderby=fields/Order`).get();
     return items.value;
 }
 

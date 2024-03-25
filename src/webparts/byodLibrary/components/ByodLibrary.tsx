@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './ByodLibrary.module.scss';
 import './ByodLibrary.scss';
 import { IByodLibraryProps } from './IByodLibraryProps';
-import { getGraphMemberOf, isFromTargetAudience, groupBy, getListItemsGraph, isUserManage, deleteItem } from '../services/requests';
+import { getGraphMemberOf, isFromTargetAudience, groupBy, getListItemsGraph, isUserManage, deleteItem, getListGuid } from '../services/requests';
 // import { escape } from '@microsoft/sp-lodash-subset';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -36,6 +36,7 @@ export default function ByodLibrary(props: IByodLibraryProps) {
   const [hideDeleteDialog, {toggle: toggleHideDeleteDialog}] = useBoolean(true);
   const [isDataLoading, { toggle: toggleIsDataLoading }] = useBoolean(false);
   const [libItemId, setLibItemId] = React.useState(null);
+  const [listID, setListID] = React.useState('');
 
   React.useEffect(()=>{
     console.log("props.context", props.context);
@@ -70,6 +71,8 @@ export default function ByodLibrary(props: IByodLibraryProps) {
       }else{
         setShowBasedOnTargetAudience(true);
       }
+
+      getListGuid(props.context, props.siteUrl, props.listName).then(res=>setListID(res));
 
     });
 
@@ -114,6 +117,11 @@ export default function ByodLibrary(props: IByodLibraryProps) {
   const viewAllHandler = () => {
     window.open(`${props.siteUrl}/lists/${props.listName}/Allitems.aspx`, '_blank');
   };
+  const orderHandler = () => {
+    setIframeState('Edit')
+    setIframeUrl(`${props.siteUrl}/_layouts/15/Reorder.aspx?List=%7b${listID}%7d`);
+    setIframeShow(true);
+  };
   const deleteItemHandler = () =>{
     toggleIsDataLoading();
     deleteItem(props.context, props.siteUrl, props.listName, libItemId).then(()=>{
@@ -149,7 +157,7 @@ export default function ByodLibrary(props: IByodLibraryProps) {
   const onIFrameLoad = async (iframe: any) => {
     let keepOpen: boolean;
     if (iframeState === "Add" || iframeState === "Edit")
-      keepOpen = iframe.contentWindow.location.href.indexOf('Newform.aspx') > 0 || iframe.contentWindow.location.href.indexOf('Editform.aspx') > 0;
+      keepOpen = iframe.contentWindow.location.href.indexOf('Newform.aspx') > 0 || iframe.contentWindow.location.href.indexOf('Editform.aspx') > 0 || iframe.contentWindow.location.href.indexOf('Reorder.aspx') > 0;
     else
       keepOpen = iframe.contentWindow.location.href.indexOf('AllItems.aspx') > 0;
     if (!keepOpen) {
@@ -238,6 +246,7 @@ export default function ByodLibrary(props: IByodLibraryProps) {
                   toggleHideDialog={handleToggleHideDialog} 
                   handleEditChange={handleEditChange} 
                   viewAllHandler = {viewAllHandler}
+                  orderHandler = {orderHandler}
                 />
               }
             </div>
