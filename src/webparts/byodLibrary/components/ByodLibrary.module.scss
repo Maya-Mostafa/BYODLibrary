@@ -2,7 +2,6 @@
 
 .byodLibrary {
   overflow: hidden;
-  padding: 1em;
   color: "[theme:bodyText, default: #323130]";
   color: var(--bodyText);
   &.teams {
@@ -76,6 +75,7 @@
   }
 }
 .cardFlag{
+  margin-top: 15px;
   .flagItem{
     background: #0096CF;
     color: #fff;
@@ -152,7 +152,7 @@
 .cardContent {
   position: relative;
   padding: 0px 10px 32px 10px;
-  margin: 16px 8px 8px 0;
+  margin: 0px 8px 8px 0;
   max-height: 290px;
   overflow-y: scroll;
 }
@@ -173,7 +173,7 @@
 
 .cardTitle {
   position: relative;
-  margin: 0 0 24px;
+  margin: 10px 0 24px;
   padding-bottom: 10px;
   text-align: center;
   font-size: 18px;
@@ -205,12 +205,18 @@ hr {
   border-top: 2px solid #c89b3f;
 }
 
-.cardText p {
-  margin: 0 0 24px;
-  font-size: 14px;
-  line-height: 1.5;
-  &:last-child {
-    margin: 0;
+.cardText {
+  a{
+    text-decoration: none;
+    color: #333;
+  }
+  p{
+    margin: 0 0 24px;
+    font-size: 14px;
+    line-height: 1.5;
+    &:last-child {
+      margin: 0;
+    }
   }
 }
 
