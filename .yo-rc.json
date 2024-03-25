@@ -8,12 +8,12 @@
       "@microsoft/teams-js": "2.9.1"
     },
     "version": "1.17.1",
-    "libraryName": "byod-library",
+    "libraryName": "peel-cards",
     "libraryId": "d21b7901-79b3-4361-bd4b-dd0470556acb",
     "environment": "spo",
     "packageManager": "npm",
-    "solutionName": "byod-library",
-    "solutionShortDescription": "byod-library description",
+    "solutionName": "peel-cards",
+    "solutionShortDescription": "peel-cards description",
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "componentType": "webpart"

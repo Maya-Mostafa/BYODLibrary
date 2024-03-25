@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "byod-library-client-side-solution",
+    "name": "peel-cards-client-side-solution",
     "id": "d21b7901-79b3-4361-bd4b-dd0470556acb",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -16,10 +16,10 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "byod-library description"
+        "default": "peel-cards description"
       },
       "longDescription": {
-        "default": "byod-library description"
+        "default": "peel-cards description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
@@ -27,14 +27,14 @@
     },
     "features": [
       {
-        "title": "byod-library Feature",
-        "description": "The feature that activates elements of the byod-library solution.",
+        "title": "peel-cards Feature",
+        "description": "The feature that activates elements of the peel-cards solution.",
         "id": "603418e8-bf65-4934-bf39-2b24d8f36949",
         "version": "1.0.0.0"
       }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/byod-library.sppkg"
+    "zippedPackage": "solution/peel-cards.sppkg"
   }
 }
