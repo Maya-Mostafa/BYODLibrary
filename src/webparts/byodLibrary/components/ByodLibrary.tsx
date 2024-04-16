@@ -53,7 +53,7 @@ export default function ByodLibrary(props: IByodLibraryProps) {
       setFilteredItems(res);
     });
     getGraphMemberOf(props.context).then((memberOfGroupsRes: any) => {
-      console.log("grpahMemberOf", memberOfGroupsRes);
+      console.log("graphMemberOf", memberOfGroupsRes);
       setMemberofGroups(memberOfGroupsRes);
 
       if (props.isCollapsible){
@@ -67,7 +67,7 @@ export default function ByodLibrary(props: IByodLibraryProps) {
       }
 
       if (props.showBasedOnTargetAudience && props.targetAudience && props.targetAudience.length > 0){
-        setShowBasedOnTargetAudience(isFromTargetAudience(props.userEmail, memberOfGroups, props.targetAudience, 'fullName'));
+        setShowBasedOnTargetAudience(isFromTargetAudience(props.userEmail, memberOfGroupsRes, props.targetAudience, 'fullName'));
       }else{
         setShowBasedOnTargetAudience(true);
       }
